@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Todo;
 use App\Models\User;
 use Facade\FlareClient\View;
+use Illuminate\Support\Facades\Auth;
 
 class TodosController extends Controller
 {
     public function index()
     {
-        $todos = Todo::all();
+        if (Auth::user()->profile === 'admin') {
+            $todos = Todo::all();
+        } else {
+            $todos = Todo::where('user_email', Auth::user()->email)->get();
+        }
         return view('todos.show', compact('todos'));
     }
     public function edit($id)
