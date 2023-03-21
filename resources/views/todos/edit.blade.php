@@ -1,5 +1,4 @@
 @extends('layouts.app')
-<!-- edit view -->
 @section('content')
 <div class="container">
     <h2>Editar {{$todo->title}}</h2>
@@ -12,6 +11,14 @@
         <div class="form-group">
             <label for="description">Descripción</label>
             <textarea class="form-control" id="description" name="description" rows="3">{{ $todo->description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="categorias">Categorías</label>
+            <select class="form-control" id="categorias" name="categorias">
+                @foreach ($categorias as $categoria)
+                <option value="{{ $categoria->name }}" {{ $todo->categorias == $categoria->name ? 'selected' : '' }}>{{ $categoria->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             <label for="status">Estado</label>

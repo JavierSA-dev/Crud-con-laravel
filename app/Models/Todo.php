@@ -12,5 +12,8 @@ class Todo extends Model
         return $this->belongsTo('App\Models\User');
     }
     use HasFactory;
-
+    public function categories()
+    {
+        return $this->belongsTo('App\Models\Categorie');
+    }
 }
